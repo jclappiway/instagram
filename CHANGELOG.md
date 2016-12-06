@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 6.0.1
+
+- PHP 5.6 for old school project :/
+
 ## 6.0.0 (released 2016-11-23)
 
 - Move the exception class

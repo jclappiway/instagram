@@ -9,8 +9,6 @@
  * file that was distributed with this source code.
  */
 
-declare(strict_types=1);
-
 namespace Vinkla\Instagram;
 
 use GuzzleHttp\Client;
@@ -35,12 +33,13 @@ class Instagram
      * Create a new instagram instance.
      *
      * @param \GuzzleHttp\ClientInterface $client
-     *
-     * @return void
      */
     public function __construct(ClientInterface $client = null)
     {
-        $this->client = $client ?: new Client();
+        if (is_null($client)) {
+            $client = new Client();
+        }
+        $this->client = $client;
     }
 
     /**
@@ -52,14 +51,16 @@ class Instagram
      *
      * @return array
      */
-    public function get(string $user): array
+    public function get($user)
     {
         try {
             $url = sprintf('https://www.instagram.com/%s/media', $user);
 
             $response = $this->client->get($url);
+            $body     = $response->getBody();
+            $content  = $body->getContents();
 
-            return json_decode((string) $response->getBody(), true)['items'];
+            return json_decode($content, true)['items'];
         } catch (RequestException $e) {
             throw new InstagramException(sprintf('The user [%s] was not found.', $user));
         }

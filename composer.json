@@ -1,5 +1,5 @@
 {
-    "name": "vinkla/instagram",
+    "name": "jclappiway/instagram",
     "description": "An easy-to-use and simple Instagram package",
     "license": "MIT",
     "keywords": ["instagram", "media", "feed"],
@@ -11,7 +11,7 @@
         }
     ],
     "require": {
-        "php": "^7.0",
+        "php": "^5.6",
         "guzzlehttp/guzzle": "^6.2.1"
     },
     "require-dev": {
